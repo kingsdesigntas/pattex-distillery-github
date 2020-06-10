@@ -24,6 +24,7 @@ colors = {
   footerBg: colors.offWhite,
   footerHeading: colors.red,
   navbarActiveText: colors.red,
+  textAlt: "#4e4e4e",
 }
 
 //Additional modes
@@ -37,6 +38,9 @@ colors.modes = {
     logoBgSecondary: colors.darkGrey,
     logoColorSecondary: colors.white,
     footerBg: colors.offDarkGrey,
+    footerHeading: colors.red,
+    navbarActiveText: colors.red,
+    textAlt: "#BBBBBB",
   },
 }
 

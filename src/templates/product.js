@@ -1,12 +1,16 @@
-import { graphql } from "gatsby"
 import React, { useState, useContext } from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Logo from "../components/Logo"
 import Box from "../components/Box"
+import Text from "../components/Text"
 import styled from "styled-components"
 import css from "@styled-system/css"
 import { motion, AnimateSharedLayout } from "framer-motion"
+import { graphql } from "gatsby"
+import ProductNotes from "../components/Product/ProductNotes"
+import ProductStory from "../components/Product/ProductStory"
+import ProductBuy from "../components/Product/ProductBuy"
 
 const NavbarContext = React.createContext()
 const useNavbar = () => useContext(NavbarContext)
@@ -48,6 +52,7 @@ const Navbar = () => {
       left="0"
       width="100%"
       p="2"
+      py="3"
       bg="background"
       color="text"
     >
@@ -90,52 +95,9 @@ const ProductLayout = () => {
     <AnimateSharedLayout>
       {page === "story" && <ProductStory />}
       {page === "notes" && <ProductNotes />}
-
+      {page === "buy" && <ProductBuy />}
       <Navbar />
     </AnimateSharedLayout>
-  )
-}
-
-const ProductStory = () => {
-  return (
-    <Box as={motion.div} animate layoutId="content-box">
-      <Logo layoutId="logo" />
-      <Box
-        animate
-        layoutId="content-box-copy"
-        as={motion.div}
-        css={`
-          border: 1px solid #000;
-        `}
-        width={"50%"}
-        mx="auto"
-        p="3"
-      >
-        Story
-      </Box>
-    </Box>
-  )
-}
-
-const ProductNotes = () => {
-  return (
-    <Box as={motion.div} animate layoutId="content-box">
-      <Logo variant="secondary" layoutId="logo" animate="false" />
-      <Box
-        animate
-        layoutId="content-box-copy"
-        as={motion.div}
-        css={`
-          border: 1px solid #000;
-        `}
-        width={"50%"}
-        p="3"
-      >
-        Notes
-        <br />
-        NOtes
-      </Box>
-    </Box>
   )
 }
 

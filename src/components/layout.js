@@ -10,7 +10,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 // the full theme object
 import baseTheme from "../../theme"
 import { Reset } from "styled-reset"
@@ -47,6 +47,7 @@ body {
   background-color: ${props => props.theme.colors.background};
   color: ${props => props.theme.colors.text};
   font-family: "Libre Franklin", sans-serif;
+  line-height: 1.2;
 }
 
 button {
@@ -76,6 +77,7 @@ const ModeToggle = styled.button`
   right: 2rem;
   top: 2rem;
   cursor: pointer;
+  z-index: 100;
   ${css({
     p: 2,
   })}
@@ -85,9 +87,26 @@ const ModeToggle = styled.button`
   }
 `
 
+const useStateWithLocalstorage = (storageKey, initialState = null) => {
+  const [state, setState] = useState(initialState)
+
+  useEffect(() => {
+    const storedValue = window.localStorage.getItem(storageKey)
+    if (storedValue !== null) {
+      setState(storedValue)
+    }
+  }, [])
+
+  useEffect(() => {
+    window.localStorage.setItem(storageKey, state)
+  }, [state])
+
+  return [state, setState]
+}
+
 const Layout = ({ children }) => {
   // state for changing modes dynamically
-  const [mode, setMode] = useState(modes[0])
+  const [mode, setMode] = useStateWithLocalstorage("color-mode", modes[0])
   const theme = getTheme(mode)
 
   return (
