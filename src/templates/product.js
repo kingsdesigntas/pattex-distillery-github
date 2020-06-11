@@ -13,13 +13,26 @@ import ProductStory from "../components/Product/ProductStory"
 import ProductBuy from "../components/Product/ProductBuy"
 import Navbar, { NavbarProvider, useNavbar } from "../components/Navbar"
 
-const ProductTemplate = () => {
+export const ProductContext = React.createContext()
+export const useProduct = () => useContext(ProductContext)
+export const ProductProvider = ({ children, product }) => {
+  return (
+    <ProductContext.Provider value={{ ...product }}>
+      {children}
+    </ProductContext.Provider>
+  )
+}
+
+const ProductTemplate = ({ data, ...props }) => {
+  const { product } = data
   return (
     <NavbarProvider>
-      <Layout>
-        <SEO title="Home" />
-        <ProductLayout />
-      </Layout>
+      <ProductProvider product={product}>
+        <Layout>
+          <SEO title="Pattex Distillery" />
+          <ProductLayout />
+        </Layout>
+      </ProductProvider>
     </NavbarProvider>
   )
 }
@@ -36,9 +49,11 @@ const ProductLayout = () => {
   )
 }
 
-export const query = graphql`
-  query ShopifyProduct($id: String) {
-    product: shopifyProduct(id: { eq: $id }) {
+/*export const query = graphql`
+  #query ShopifyProduct($id: String) {
+  query ShopifyProduct {
+    #product: shopifyProduct(id: { eq: $id }) {
+    product: shopifyProduct(handle: { eq: "section-44-gin" }) {
       images {
         localFile {
           size
@@ -77,6 +92,6 @@ export const query = graphql`
       }
     }
   }
-`
+`*/
 
 export default ProductTemplate

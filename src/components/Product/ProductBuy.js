@@ -9,6 +9,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import QuantityInput from "./QuantityInput"
 import { useColorMode } from "../layout"
+import { useProduct } from "../../templates/product"
 
 const Pricing = ({ price, suffix = null, ...props }) => {
   return (
@@ -31,6 +32,7 @@ const Pricing = ({ price, suffix = null, ...props }) => {
 
 const BuyButton = styled.button`
   border: 1px solid transparent;
+  text-decoration: none;
   ${css({
     py: 3,
     px: 4,
@@ -43,6 +45,11 @@ const BuyButton = styled.button`
 
 const AddToCart = () => {
   const [qty, setQty] = useState(1)
+  const product = useProduct()
+  console.log({ product })
+  const id = atob(product.variants.slice(0)[0].shopifyId)
+    .split("/")
+    .slice(-1)[0]
   return (
     <Box my="4">
       <Box display="flex" alignItems="center" justifyContent="center">
@@ -50,7 +57,12 @@ const AddToCart = () => {
           <QuantityInput value={qty} onChange={setQty} />
         </Box>
         <Box px="2">
-          <BuyButton>Buy now</BuyButton>
+          <BuyButton
+            as="a"
+            href={`http://pattex-distillery.myshopify.com/cart/add?id=${id}&quantity=${qty}`}
+          >
+            Add to cart
+          </BuyButton>
         </Box>
       </Box>
     </Box>
