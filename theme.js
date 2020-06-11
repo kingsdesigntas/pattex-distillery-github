@@ -25,6 +25,11 @@ colors = {
   footerHeading: colors.red,
   navbarActiveText: colors.red,
   textAlt: "#4e4e4e",
+  buyButtonColor: colors.red,
+  buyButtonBorder: colors.warmGrey,
+  buyButtonBackground: colors.warmGrey,
+  inputBackground: colors.white,
+  inputBorder: colors.warmGrey,
 }
 
 //Additional modes
@@ -41,6 +46,11 @@ colors.modes = {
     footerHeading: colors.red,
     navbarActiveText: colors.red,
     textAlt: "#BBBBBB",
+    buyButtonColor: colors.white,
+    buyButtonBorder: colors.red,
+    buyButtonBackground: colors.red,
+    inputBackground: colors.white,
+    inputBorder: colors.warmGrey,
   },
 }
 
