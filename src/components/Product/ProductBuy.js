@@ -115,7 +115,7 @@ const ProductBuy = () => {
             maxWidth="36rem"
             mx="auto"
             css={`
-              border: 1px solid ${props => props.theme.colors.text};
+              border: 1px solid ${props => props.theme.colors.background};
             `}
           >
             <motion.div animate>

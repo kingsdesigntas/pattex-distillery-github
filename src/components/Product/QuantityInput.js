@@ -19,6 +19,7 @@ const QuantityInput = styled.input`
     fontSize: 2,
     bg: "inputBackground",
     borderColor: "inputBorder",
+    color: "inputColor",
   })}
 
   /* Chrome, Safari, Edge, Opera */

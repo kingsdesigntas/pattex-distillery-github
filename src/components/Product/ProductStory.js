@@ -6,8 +6,12 @@ import styled from "styled-components"
 import css from "@styled-system/css"
 import { motion } from "framer-motion"
 import { graphql } from "gatsby"
+import NextButton from "./NextButton"
+import { useNavbar } from "../Navbar"
 
 const ProductStory = () => {
+  const { nextPage } = useNavbar()
+
   return (
     <Box px="3">
       <Box position="absolute" top="0" width="100%" left="0" pt="5">
@@ -50,6 +54,9 @@ const ProductStory = () => {
             SECTION 44 OF THE CONSTITUTION, THIS UNIQUE TASMANIAN GIN MAY NEVER
             HAVE BEEN CRAFTED."
           </Text>
+          <Box display="flex" justifyContent="center" mt="3">
+            <NextButton onClick={nextPage} />
+          </Box>
         </motion.div>
       </Box>
     </Box>

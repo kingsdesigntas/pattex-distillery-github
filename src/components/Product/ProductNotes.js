@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import { useColorMode } from "../layout"
+import { useNavbar } from "../Navbar"
+import NextButton from "./NextButton"
 
 const ProductNotes = () => {
   const data = useStaticQuery(graphql`
@@ -30,6 +32,8 @@ const ProductNotes = () => {
   `)
 
   const { mode } = useColorMode()
+
+  const { nextPage } = useNavbar()
 
   return (
     <Box px="3">
@@ -60,6 +64,9 @@ const ProductNotes = () => {
                 FORTUNATE CONSUMER THE CHANCE TO WAIVE THE EFFORT OF ADDING
                 FRUIT. ENJOY WITH OR WITHOUT!"
               </Text>
+              <Box display="flex" justifyContent="center" mt="3">
+                <NextButton onClick={nextPage} />
+              </Box>
             </motion.div>
           </Box>
         </Box>

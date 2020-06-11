@@ -11,72 +11,7 @@ import { graphql } from "gatsby"
 import ProductNotes from "../components/Product/ProductNotes"
 import ProductStory from "../components/Product/ProductStory"
 import ProductBuy from "../components/Product/ProductBuy"
-
-const NavbarContext = React.createContext()
-const useNavbar = () => useContext(NavbarContext)
-const NavbarProvider = ({ children }) => {
-  const [page, setPage] = useState("story")
-
-  return (
-    <NavbarContext.Provider value={{ page, setPage }}>
-      {children}
-    </NavbarContext.Provider>
-  )
-}
-
-const NavbarItem = styled.li`
-  ${css({ mx: 2 })}
-`
-const NavbarButton = styled.button`
-    ${css({ px: 2, py: 1 })}
-    color: ${props =>
-      props.active
-        ? props.theme.colors.navbarActiveText
-        : props.theme.colors.text};
-
-  `
-
-const Navbar = () => {
-  const { page, setPage } = useNavbar()
-
-  const pages = [
-    { name: "story", title: "Story" },
-    { name: "notes", title: "Flavour Notes" },
-    { name: "buy", title: "Buy" },
-  ]
-
-  return (
-    <Box
-      position={["fixed", "fixed", "fixed", "relative"]}
-      bottom="0"
-      left="0"
-      width="100%"
-      p="2"
-      py="3"
-      bg="background"
-      color="text"
-    >
-      <ul
-        css={`
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        `}
-      >
-        {pages.map(_page => (
-          <NavbarItem key={_page.name}>
-            <NavbarButton
-              active={_page.name === page}
-              onClick={() => setPage(_page.name)}
-            >
-              {_page.title}
-            </NavbarButton>
-          </NavbarItem>
-        ))}
-      </ul>
-    </Box>
-  )
-}
+import Navbar, { NavbarProvider, useNavbar } from "../components/Navbar"
 
 const ProductTemplate = () => {
   return (
