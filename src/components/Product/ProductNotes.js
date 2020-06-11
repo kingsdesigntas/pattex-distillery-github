@@ -7,19 +7,29 @@ import css from "@styled-system/css"
 import { motion, AnimatePresence } from "framer-motion"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
+import { useColorMode } from "../layout"
 
 const ProductNotes = () => {
   const data = useStaticQuery(graphql`
     query BottleFrontImageQuery {
       bottleFront: file(relativePath: { eq: "bottle-front.png" }) {
         childImageSharp {
-          fluid(maxWidth: 300) {
+          fluid(maxWidth: 600) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      bottleFrontDark: file(relativePath: { eq: "bottle-front-dark.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 600) {
             ...GatsbyImageSharpFluid
           }
         }
       }
     }
   `)
+
+  const { mode } = useColorMode()
 
   return (
     <Box px="3">
@@ -67,7 +77,13 @@ const ProductNotes = () => {
                 exit={{ opacity: 0, x: 200 }}
                 transition={{ ease: "easeOut", duration: 0.5 }}
               >
-                <Img fluid={data.bottleFront.childImageSharp.fluid} />
+                <Img
+                  fluid={
+                    mode === "dark"
+                      ? data.bottleFrontDark.childImageSharp.fluid
+                      : data.bottleFront.childImageSharp.fluid
+                  }
+                />
               </Box>
             </AnimatePresence>
           </Box>

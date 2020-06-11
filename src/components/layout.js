@@ -10,7 +10,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components"
 
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 // the full theme object
 import baseTheme from "../../theme"
 import { Reset } from "styled-reset"
@@ -106,6 +106,9 @@ const useStateWithLocalstorage = (storageKey, initialState = null) => {
   return [state, setState]
 }
 
+export const ColorModeContext = React.createContext()
+export const useColorMode = () => useContext(ColorModeContext)
+
 const Layout = ({ children }) => {
   // state for changing modes dynamically
   const [mode, setMode] = useStateWithLocalstorage("color-mode", modes[0])
@@ -113,15 +116,17 @@ const Layout = ({ children }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Reset />
-      <GlobalStyle />
-      <ModeToggle
-        onClick={() => (mode === "dark" ? setMode("light") : setMode("dark"))}
-      >
-        {mode}
-      </ModeToggle>
-      <main>{children}</main>
-      <Footer />
+      <ColorModeContext.Provider value={{ mode, setMode }}>
+        <Reset />
+        <GlobalStyle />
+        <ModeToggle
+          onClick={() => (mode === "dark" ? setMode("light") : setMode("dark"))}
+        >
+          {mode}
+        </ModeToggle>
+        <main>{children}</main>
+        <Footer />
+      </ColorModeContext.Provider>
     </ThemeProvider>
   )
 }

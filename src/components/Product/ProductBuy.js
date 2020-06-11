@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import QuantityInput from "./QuantityInput"
+import { useColorMode } from "../layout"
 
 const Pricing = ({ price, suffix = null, ...props }) => {
   return (
@@ -66,7 +67,22 @@ const ProductBuy = () => {
           }
         }
       }
+      bottleBackDark: file(relativePath: { eq: "bottle-back-dark.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 600) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
       section44Black: file(relativePath: { eq: "section-44-black.png" }) {
+        childImageSharp {
+          fixed(width: 168) {
+            # Choose either the fragment including a small base64ed image, a traced placeholder SVG, or one without.
+            ...GatsbyImageSharpFixed
+          }
+        }
+      }
+      section44White: file(relativePath: { eq: "section-44-white.png" }) {
         childImageSharp {
           fixed(width: 168) {
             # Choose either the fragment including a small base64ed image, a traced placeholder SVG, or one without.
@@ -76,6 +92,8 @@ const ProductBuy = () => {
       }
     }
   `)
+
+  const { mode } = useColorMode()
 
   return (
     <Box px="3">
@@ -102,7 +120,13 @@ const ProductBuy = () => {
           >
             <motion.div animate>
               <Box mx="auto" maxWidth="168px">
-                <Img fixed={data.section44Black.childImageSharp.fixed} />
+                <Img
+                  fixed={
+                    mode === "dark"
+                      ? data.section44White.childImageSharp.fixed
+                      : data.section44Black.childImageSharp.fixed
+                  }
+                />
               </Box>
               <Text textAlign="center" fontStyle="italic" fontSize="3">
                 Limited Release
@@ -137,7 +161,13 @@ const ProductBuy = () => {
                 exit={{ opacity: 0, x: 200 }}
                 transition={{ ease: "easeOut", duration: 0.5 }}
               >
-                <Img fluid={data.bottleBack.childImageSharp.fluid} />
+                <Img
+                  fluid={
+                    mode === "dark"
+                      ? data.bottleBackDark.childImageSharp.fluid
+                      : data.bottleBack.childImageSharp.fluid
+                  }
+                />
               </Box>
             </AnimatePresence>
           </Box>
