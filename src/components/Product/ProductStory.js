@@ -21,8 +21,9 @@ const ProductStory = () => {
         width={["100%", "50%"]}
         mx="auto"
         p="4"
-        mt="8"
-        mb="6"
+        pt={[5, , , 6]}
+        mt={7}
+        mb={[5, , , 6]}
         maxWidth="32rem"
       >
         <Text

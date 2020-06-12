@@ -33,6 +33,7 @@ const Pricing = ({ price, suffix = null, ...props }) => {
 const BuyButton = styled.button`
   border: 1px solid transparent;
   text-decoration: none;
+  white-space: nowrap;
   ${css({
     py: 3,
     px: 4,

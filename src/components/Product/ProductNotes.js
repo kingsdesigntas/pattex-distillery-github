@@ -45,8 +45,9 @@ const ProductNotes = () => {
         display={["block", "block", "grid"]}
         gridTemplateColumns={"50% 50%"}
         mx="auto"
+        pt={[5, , , 6]}
       >
-        <Box>
+        <Box mt={4}>
           <Box
             layoutId="content-box-copy"
             as={motion.div}
@@ -54,7 +55,7 @@ const ProductNotes = () => {
               border: 1px solid ${props => props.theme.colors.text};
             `}
             p="4"
-            mt="8"
+            mt={7}
             maxWidth="36rem"
             mx="auto"
           >
@@ -74,6 +75,7 @@ const ProductNotes = () => {
           css={`
             overflow: hidden;
           `}
+          py={[5, , , 0]}
         >
           <Box maxWidth="400px" mx="auto">
             <AnimatePresence>
