@@ -16,6 +16,7 @@ import baseTheme from "../../theme"
 import { Reset } from "styled-reset"
 import { color } from "styled-system"
 import css from "@styled-system/css"
+import Box from "./Box"
 
 import Footer from "../components/footer"
 
@@ -69,20 +70,28 @@ button,a,input {
 
 `
 
-const ModeToggle = styled.button`
-  border-radius: 0;
-  background: transparent;
-  color: ${props => props.theme.colors.modeButtonColor};
-  border: 1px solid transparent;
-  border-color: ${props => props.theme.colors.modeButtonColor};
+const ModeToggleBox = styled(Box)`
   position: absolute;
   right: 2rem;
   top: 2rem;
-  cursor: pointer;
   z-index: 100;
+`
+
+const ModeToggle = styled.button`
+  border-radius: 0;
+  background: ${props => props.theme.colors.modeButtonColor};
+  color: ${props => props.theme.colors.background};
+  border: 1px solid transparent;
+  border-color: ${props => props.theme.colors.modeButtonColor};
+  cursor: pointer;
   ${css({
     p: 2,
   })}
+  ${props =>
+    props.variant === "dark"
+      ? `background: ${props.theme.colors.offDarkGrey}; color: ${props.theme.colors.white};`
+      : ""}
+      ${props => (props.disabled ? `opacity:0.5; cursor: auto;` : null)}
   &:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
@@ -119,11 +128,22 @@ const Layout = ({ children }) => {
       <ColorModeContext.Provider value={{ mode, setMode }}>
         <Reset />
         <GlobalStyle />
-        <ModeToggle
-          onClick={() => (mode === "dark" ? setMode("light") : setMode("dark"))}
-        >
-          {mode}
-        </ModeToggle>
+        <ModeToggleBox>
+          <ModeToggle
+            onClick={() => setMode("light")}
+            disabled={mode === "light"}
+            variant="light"
+          >
+            Light
+          </ModeToggle>
+          <ModeToggle
+            onClick={() => setMode("dark")}
+            disabled={mode === "dark"}
+            variant="dark"
+          >
+            Dark
+          </ModeToggle>
+        </ModeToggleBox>
         <main>{children}</main>
         <Footer />
       </ColorModeContext.Provider>
