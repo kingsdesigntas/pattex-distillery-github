@@ -10,6 +10,7 @@ import Img from "gatsby-image"
 import QuantityInput from "./QuantityInput"
 import { useColorMode } from "../layout"
 import { useProduct } from "../../templates/product"
+import Navbar from "../Navbar"
 
 const Pricing = ({ price, suffix = null, ...props }) => {
   return (
@@ -73,17 +74,17 @@ const AddToCart = () => {
 const ProductBuy = () => {
   const data = useStaticQuery(graphql`
     query ProductBuyQuery {
-      bottleBack: file(relativePath: { eq: "bottle-back.png" }) {
+      bottleBack: file(relativePath: { eq: "bottle-back-photo.png" }) {
         childImageSharp {
           fluid(maxWidth: 600) {
-            ...GatsbyImageSharpFluid
+            ...GatsbyImageSharpFluid_noBase64
           }
         }
       }
       bottleBackDark: file(relativePath: { eq: "bottle-back-dark.png" }) {
         childImageSharp {
           fluid(maxWidth: 600) {
-            ...GatsbyImageSharpFluid
+            ...GatsbyImageSharpFluid_noBase64
           }
         }
       }
@@ -108,6 +109,8 @@ const ProductBuy = () => {
 
   const { mode } = useColorMode()
 
+  const product = useProduct()
+
   return (
     <Box px="3">
       <Box position="absolute" top="0" width="100%" left="0" pt="5">
@@ -119,7 +122,7 @@ const ProductBuy = () => {
         gridTemplateColumns={"50% 50%"}
         mx="auto"
       >
-        <Box>
+        <Box mb="3">
           <Box
             layoutId="content-box-copy"
             as={motion.div}
@@ -144,11 +147,17 @@ const ProductBuy = () => {
               <Text textAlign="center" fontStyle="italic" fontSize="3">
                 Limited Release
               </Text>
-              <Text my="4" textAlign="center" fontSize="4">
-                Handcrafted Tasmanian Gin
-              </Text>
+              <Text
+                my="4"
+                textAlign="center"
+                fontSize="4"
+                dangerouslySetInnerHTML={{
+                  __html: product.getMetafield("short_description"),
+                }}
+              />
+
               <Box my="4">
-                <Pricing price="88" suffix="/ bottle" />
+                <Pricing price={product.getSinglePrice()} suffix="/ bottle" />
                 <Pricing price="568" suffix="/ box of 6" />
               </Box>
               <Text color="textAlt" fontSize="3" textAlign="center">
@@ -158,6 +167,9 @@ const ProductBuy = () => {
                 <AddToCart quantity={1} />
               </Box>
             </motion.div>
+          </Box>
+          <Box mb="6">
+            <Navbar />
           </Box>
         </Box>
         <Box
@@ -175,6 +187,7 @@ const ProductBuy = () => {
                 transition={{ ease: "easeOut", duration: 0.5 }}
               >
                 <Img
+                  loading="eager"
                   fluid={
                     mode === "dark"
                       ? data.bottleBackDark.childImageSharp.fluid

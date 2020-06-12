@@ -49,6 +49,10 @@ export const query = graphql`
         }
         title
       }
+      metafields {
+        key
+        value
+      }
     }
   }
 `

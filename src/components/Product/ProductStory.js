@@ -7,10 +7,12 @@ import css from "@styled-system/css"
 import { motion } from "framer-motion"
 import { graphql } from "gatsby"
 import NextButton from "./NextButton"
-import { useNavbar } from "../Navbar"
+import Navbar, { useNavbar } from "../Navbar"
+import { useProduct } from "../../templates/product"
 
 const ProductStory = () => {
   const { nextPage } = useNavbar()
+  const product = useProduct()
 
   return (
     <Box px="3">
@@ -23,7 +25,7 @@ const ProductStory = () => {
         p="4"
         pt={[5, , , 6]}
         mt={7}
-        mb={[5, , , 6]}
+        mb={[5]}
         maxWidth="32rem"
       >
         <Text
@@ -46,19 +48,23 @@ const ProductStory = () => {
         mx="auto"
         p="4"
         mt="2"
-        mb="6"
+        mb="3"
         maxWidth="36rem"
       >
         <motion.div animate>
-          <Text lineHeight="1.5" textAlign="center">
-            "IF IT WAS NOT FOR THE HIGH COURT OF AUSTRALIA RULING IN RELATION TO
-            SECTION 44 OF THE CONSTITUTION, THIS UNIQUE TASMANIAN GIN MAY NEVER
-            HAVE BEEN CRAFTED."
-          </Text>
+          <Text
+            lineHeight="1.5"
+            textAlign="center"
+            as="div"
+            dangerouslySetInnerHTML={{ __html: product.getMetafield("story") }}
+          />
           <Box display="flex" justifyContent="center" mt="3">
             <NextButton onClick={nextPage} />
           </Box>
         </motion.div>
+      </Box>
+      <Box mb="6">
+        <Navbar />
       </Box>
     </Box>
   )

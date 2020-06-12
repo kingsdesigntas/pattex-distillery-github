@@ -8,23 +8,24 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import { useColorMode } from "../layout"
-import { useNavbar } from "../Navbar"
+import Navbar, { useNavbar } from "../Navbar"
 import NextButton from "./NextButton"
+import { useProduct } from "../../templates/product"
 
 const ProductNotes = () => {
   const data = useStaticQuery(graphql`
     query BottleFrontImageQuery {
-      bottleFront: file(relativePath: { eq: "bottle-front.png" }) {
+      bottleFront: file(relativePath: { eq: "bottle-front-photo.png" }) {
         childImageSharp {
           fluid(maxWidth: 600) {
-            ...GatsbyImageSharpFluid
+            ...GatsbyImageSharpFluid_noBase64
           }
         }
       }
       bottleFrontDark: file(relativePath: { eq: "bottle-front-dark.png" }) {
         childImageSharp {
           fluid(maxWidth: 600) {
-            ...GatsbyImageSharpFluid
+            ...GatsbyImageSharpFluid_noBase64
           }
         }
       }
@@ -34,6 +35,8 @@ const ProductNotes = () => {
   const { mode } = useColorMode()
 
   const { nextPage } = useNavbar()
+
+  const product = useProduct()
 
   return (
     <Box px="3">
@@ -45,9 +48,9 @@ const ProductNotes = () => {
         display={["block", "block", "grid"]}
         gridTemplateColumns={"50% 50%"}
         mx="auto"
-        pt={[5, , , 6]}
+        pt={[5, , , 0]}
       >
-        <Box mt={4}>
+        <Box mt={4} pt={[0, 0, 5]}>
           <Box
             layoutId="content-box-copy"
             as={motion.div}
@@ -58,17 +61,24 @@ const ProductNotes = () => {
             mt={7}
             maxWidth="36rem"
             mx="auto"
+            mb="3"
           >
             <motion.div animate>
-              <Text lineHeight="1.5" textAlign="center">
-                "THE BEAUTIFUL LEMON MYRTLE TONE INFUSED IN THIS GIN AFFORDS THE
-                FORTUNATE CONSUMER THE CHANCE TO WAIVE THE EFFORT OF ADDING
-                FRUIT. ENJOY WITH OR WITHOUT!"
-              </Text>
+              <Text
+                lineHeight="1.5"
+                textAlign="center"
+                dangerouslySetInnerHTML={{
+                  __html: product.getMetafield("flavour_notes"),
+                }}
+              />
+
               <Box display="flex" justifyContent="center" mt="3">
                 <NextButton onClick={nextPage} />
               </Box>
             </motion.div>
+          </Box>
+          <Box mb="6">
+            <Navbar />
           </Box>
         </Box>
         <Box
@@ -87,6 +97,7 @@ const ProductNotes = () => {
                 transition={{ ease: "easeOut", duration: 0.5 }}
               >
                 <Img
+                  loading="eager"
                   fluid={
                     mode === "dark"
                       ? data.bottleFrontDark.childImageSharp.fluid

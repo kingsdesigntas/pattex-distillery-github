@@ -16,6 +16,17 @@ import Navbar, { NavbarProvider, useNavbar } from "../components/Navbar"
 export const ProductContext = React.createContext()
 export const useProduct = () => useContext(ProductContext)
 export const ProductProvider = ({ children, product }) => {
+  product.getMetafield = key => {
+    if (!product.metafields || !product.metafields.length) return null
+    const metafield = product.metafields.find(f => f.key === key)
+    if (!metafield) return null
+    return metafield.value
+  }
+
+  product.getSinglePrice = () => {
+    return product.variants[0].price
+  }
+
   return (
     <ProductContext.Provider value={{ ...product }}>
       {children}
@@ -44,7 +55,6 @@ const ProductLayout = () => {
       {page === "story" && <ProductStory />}
       {page === "notes" && <ProductNotes />}
       {page === "buy" && <ProductBuy />}
-      <Navbar />
     </AnimateSharedLayout>
   )
 }
