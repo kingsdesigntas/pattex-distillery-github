@@ -114,7 +114,7 @@ const ProductBuy = () => {
   return (
     <Box px="3">
       <Box position="absolute" top="0" width="100%" left="0" pt="5">
-        <Logo variant="secondary" animate={false} />
+        <Logo animate={false} />
       </Box>
       <Box
         maxWidth="1600px"

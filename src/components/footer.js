@@ -54,7 +54,7 @@ const Footer = () => {
         </Box>
         <Box pt="5" textAlign="center" fontSize="1">
           <Box as="span" display="block" mb="2" fontWeight="bold">
-            Liquor Licence - xxyyzz
+            Liquor Licence - 90599
           </Box>
           <Box as="span" display="block">
             Under the Liquor Licensing Act 1990 it is an offence: For liquor to

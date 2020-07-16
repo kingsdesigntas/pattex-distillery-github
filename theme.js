@@ -14,6 +14,7 @@ let colors = {
 //Primary mode colours
 colors = {
   ...colors,
+  logoOpacity: 1,
   background: colors.white,
   text: colors.black,
   modeButtonColor: colors.black,
@@ -36,13 +37,14 @@ colors = {
 //Additional modes
 colors.modes = {
   dark: {
+    logoOpacity: 0.9,
     background: colors.darkGrey,
     text: colors.white,
     modeButtonColor: colors.white,
     logoBgPrimary: colors.red,
     logoColorPrimary: colors.black,
     logoBgSecondary: colors.darkGrey,
-    logoColorSecondary: colors.white,
+    logoColorSecondary: "#ffe7ec", //colors.white,
     footerBg: colors.offDarkGrey,
     footerHeading: colors.red,
     navbarActiveText: colors.red,

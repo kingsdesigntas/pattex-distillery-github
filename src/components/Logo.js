@@ -40,6 +40,7 @@ const Logo = ({ variant = "primary", animate = true, theme } = {}) => {
   const initialProp = animate ? "hidden" : "visible"
   const animateProp = animate ? "visible" : false
   const strokePropFn = () => {
+    return theme.colors.logoColorSecondary
     return variant === "secondary"
       ? theme.colors.logoColorSecondary
       : theme.colors.logoColorPrimary
@@ -52,6 +53,9 @@ const Logo = ({ variant = "primary", animate = true, theme } = {}) => {
         viewBox="0 0 283.46 283.46"
         className="item"
         animate="false"
+        css={`
+          opacity: ${theme.colors.logoOpacity};
+        `}
       >
         <g id="background_group">
           <motion.circle
@@ -69,7 +73,12 @@ const Logo = ({ variant = "primary", animate = true, theme } = {}) => {
             initial={initialProp}
             animate={animateProp}
             transition={{
-              default: { duration: 1, ease: "easeOut" },
+              default: {
+                delay: 1.5,
+                duration: 0.5,
+                type: "spring",
+                damping: 15,
+              },
             }}
             id="backer"
             cx="141.73"
@@ -113,7 +122,7 @@ const Logo = ({ variant = "primary", animate = true, theme } = {}) => {
           animate={animateProp}
           fill={strokePropFn()}
           transition={{
-            delay: 2.2,
+            delay: 1.1,
             default: { duration: 0.1, ease: "easeOut" },
           }}
           data-name="distillery"
@@ -124,7 +133,7 @@ const Logo = ({ variant = "primary", animate = true, theme } = {}) => {
           initial={initialProp}
           animate={animateProp}
           transition={{
-            delay: 2,
+            delay: 1,
             default: { duration: 0.1, ease: "easeOut" },
           }}
           fill={strokePropFn()}
@@ -141,7 +150,7 @@ const Logo = ({ variant = "primary", animate = true, theme } = {}) => {
           initial={initialProp}
           animate={animateProp}
           transition={{
-            default: { duration: 2, ease: "easeInOut" },
+            default: { duration: 1, ease: "easeInOut" },
           }}
           d="M 264.32121,141.28999 A 122.93121,122.93121 0 0 1 141.39,264.22121 122.93121,122.93121 0 0 1 18.458786,141.28999 122.93121,122.93121 0 0 1 141.39,18.35878 122.93121,122.93121 0 0 1 264.32121,141.28999 Z"
           id="outer-out"
@@ -154,8 +163,8 @@ const Logo = ({ variant = "primary", animate = true, theme } = {}) => {
           initial={initialProp}
           animate={animateProp}
           transition={{
-            delay: 0.2,
-            default: { duration: 2, ease: "easeInOut" },
+            delay: 0.1,
+            default: { duration: 1, ease: "easeInOut" },
           }}
           d="M 250.84152,141.28999 A 109.45152,111.44645 0 0 1 141.39,252.73644 109.45152,111.44645 0 0 1 31.938477,141.28999 109.45152,111.44645 0 0 1 141.39,29.843544 109.45152,111.44645 0 0 1 250.84152,141.28999"
           fill="none"
@@ -168,8 +177,8 @@ const Logo = ({ variant = "primary", animate = true, theme } = {}) => {
           initial={initialProp}
           animate={animateProp}
           transition={{
-            delay: 0.4,
-            default: { duration: 2, ease: "easeInOut" },
+            delay: 0.2,
+            default: { duration: 1, ease: "easeInOut" },
           }}
           fill="none"
           stroke={strokePropFn()}
@@ -183,7 +192,7 @@ const Logo = ({ variant = "primary", animate = true, theme } = {}) => {
           initial={initialProp}
           animate={animateProp}
           transition={{
-            delay: 1.25,
+            delay: 0.75,
             default: { duration: 0.2, ease: "easeInOut" },
           }}
           fill="none"
@@ -197,7 +206,7 @@ const Logo = ({ variant = "primary", animate = true, theme } = {}) => {
           initial={initialProp}
           animate={animateProp}
           transition={{
-            delay: 1.5,
+            delay: 1,
             default: { duration: 0.2, ease: "easeInOut" },
           }}
           d="m 228.72349,58.136015 -7.63504,7.29191"
@@ -211,7 +220,7 @@ const Logo = ({ variant = "primary", animate = true, theme } = {}) => {
           initial={initialProp}
           animate={animateProp}
           transition={{
-            default: { duration: 0.2, ease: "easeInOut" },
+            default: { duration: 0.1, ease: "easeInOut" },
           }}
           fill="none"
           stroke={strokePropFn()}
@@ -224,8 +233,8 @@ const Logo = ({ variant = "primary", animate = true, theme } = {}) => {
           initial={initialProp}
           animate={animateProp}
           transition={{
-            delay: 0.25,
-            default: { duration: 0.2, ease: "easeInOut" },
+            delay: 0.15,
+            default: { duration: 0.1, ease: "easeInOut" },
           }}
           fill="none"
           stroke={strokePropFn()}
@@ -238,8 +247,8 @@ const Logo = ({ variant = "primary", animate = true, theme } = {}) => {
           initial={initialProp}
           animate={animateProp}
           transition={{
-            delay: 0.5,
-            default: { duration: 0.2, ease: "easeInOut" },
+            delay: 0.25,
+            default: { duration: 0.1, ease: "easeInOut" },
           }}
           fill="none"
           stroke={strokePropFn()}
@@ -252,8 +261,8 @@ const Logo = ({ variant = "primary", animate = true, theme } = {}) => {
           initial={initialProp}
           animate={animateProp}
           transition={{
-            delay: 0.75,
-            default: { duration: 0.2, ease: "easeInOut" },
+            delay: 0.25,
+            default: { duration: 0.1, ease: "easeInOut" },
           }}
           fill="none"
           stroke={strokePropFn()}
@@ -266,8 +275,8 @@ const Logo = ({ variant = "primary", animate = true, theme } = {}) => {
           initial={initialProp}
           animate={animateProp}
           transition={{
-            delay: 1,
-            default: { duration: 0.2, ease: "easeInOut" },
+            delay: 0.5,
+            default: { duration: 0.1, ease: "easeInOut" },
           }}
           fill="none"
           stroke={strokePropFn()}
@@ -280,8 +289,8 @@ const Logo = ({ variant = "primary", animate = true, theme } = {}) => {
           initial={initialProp}
           animate={animateProp}
           transition={{
-            delay: 1,
-            default: { duration: 0.2, ease: "easeInOut" },
+            delay: 0.5,
+            default: { duration: 0.1, ease: "easeInOut" },
           }}
           fill="none"
           stroke={strokePropFn()}

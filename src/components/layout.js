@@ -86,6 +86,7 @@ const ModeToggle = styled.button`
   cursor: pointer;
   ${css({
     p: 2,
+    fontSize: 1,
   })}
   ${props =>
     props.variant === "dark"
@@ -134,14 +135,14 @@ const Layout = ({ children }) => {
             disabled={mode === "light"}
             variant="light"
           >
-            Light
+            Light mode
           </ModeToggle>
           <ModeToggle
             onClick={() => setMode("dark")}
             disabled={mode === "dark"}
             variant="dark"
           >
-            Dark
+            Dark mode
           </ModeToggle>
         </ModeToggleBox>
         <main>{children}</main>

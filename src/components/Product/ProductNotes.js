@@ -41,7 +41,7 @@ const ProductNotes = () => {
   return (
     <Box px="3">
       <Box position="absolute" top="0" width="100%" left="0" pt="5">
-        <Logo variant="secondary" animate={false} />
+        <Logo animate={false} />
       </Box>
       <Box
         maxWidth="1600px"
@@ -54,8 +54,14 @@ const ProductNotes = () => {
           <Box
             layoutId="content-box-copy"
             as={motion.div}
+            /*css={`
+              box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+                0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+                0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+            `}*/
             css={`
-              border: 1px solid ${props => props.theme.colors.text};
+              box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+                0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
             `}
             p="4"
             mt={7}
