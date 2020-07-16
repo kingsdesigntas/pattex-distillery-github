@@ -160,9 +160,9 @@ const ProductBuy = () => {
                 <Pricing price={product.getSinglePrice()} suffix="/ bottle" />
                 <Pricing price="568" suffix="/ box of 6" />
               </Box>
-              <Text color="textAlt" fontSize="3" textAlign="center">
+              {/*<Text color="textAlt" fontSize="3" textAlign="center">
                 Free shipping Australia wide
-              </Text>
+              </Text>*/}
               <Box>
                 <AddToCart quantity={1} />
               </Box>
