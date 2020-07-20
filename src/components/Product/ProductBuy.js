@@ -12,19 +12,33 @@ import { useColorMode } from "../layout"
 import { useProduct } from "../../templates/product"
 import Navbar from "../Navbar"
 
-const Pricing = ({ price, suffix = null, ...props }) => {
+const Pricing = ({ price, suffix = null, regularPrice = null, ...props }) => {
   return (
-    <Box
-      display="flex"
-      alignItems="flex-end"
-      justifyContent="center"
-      {...props}
-    >
+    <Box display="flex" alignItems="center" justifyContent="center" {...props}>
       <Text color="textAlt" mb="1" mr="1">
         $
       </Text>
+      {regularPrice !== null && (
+        <Text
+          mx="2"
+          color="textAlt"
+          fontSize="3"
+          css={`
+            text-decoration: line-through;
+          `}
+        >
+          {regularPrice}
+        </Text>
+      )}
       <Text fontSize="4">{price}</Text>
-      <Text color="textAlt" mb="1" ml="1">
+      <Text
+        color="textAlt"
+        mb="1"
+        ml="1"
+        css={`
+          align-self: flex-end;
+        `}
+      >
         {suffix}
       </Text>
     </Box>
@@ -157,12 +171,16 @@ const ProductBuy = () => {
               />
 
               <Box my="4">
-                <Pricing price={product.getSinglePrice()} suffix="/ bottle" />
+                <Pricing
+                  price={product.getSinglePrice()}
+                  regularPrice={"94.00"}
+                  suffix="/ bottle"
+                />
                 <Pricing price="568" suffix="/ box of 6" />
               </Box>
-              {/*<Text color="textAlt" fontSize="3" textAlign="center">
-                Free shipping Australia wide
-              </Text>*/}
+              <Text color="textAlt" fontSize="3" textAlign="center">
+                Release offer $88 / bottle. Regular price $94 / bottle.
+              </Text>
               <Box>
                 <AddToCart quantity={1} />
               </Box>
