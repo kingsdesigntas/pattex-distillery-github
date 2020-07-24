@@ -27,6 +27,7 @@ function SEO({ description, lang, meta, title }) {
 
   const metaDescription = description || site.siteMetadata.description
 
+  const domain = process.env.GATSBY_SITE_URL
   return (
     <Helmet
       htmlAttributes={{
@@ -35,6 +36,10 @@ function SEO({ description, lang, meta, title }) {
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
+        {
+          property: "og:image",
+          content: `${domain}/og-image/index.png`,
+        },
         {
           name: `description`,
           content: metaDescription,

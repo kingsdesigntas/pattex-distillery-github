@@ -48,6 +48,7 @@ module.exports = {
         display: "swap",
       },
     },
+    `gatsby-plugin-open-graph-images`,
     {
       resolve: "gatsby-source-shopify",
       options: {
