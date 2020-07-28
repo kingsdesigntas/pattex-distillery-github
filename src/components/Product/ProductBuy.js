@@ -176,7 +176,7 @@ const ProductBuy = () => {
                   regularPrice={"94.00"}
                   suffix="/ bottle"
                 />
-                <Pricing price="568" suffix="/ box of 6" />
+                <Pricing price="504" suffix="/ box of 6" />
               </Box>
               <Text color="textAlt" fontSize="3" textAlign="center">
                 Release offer $88 / bottle. Regular price $94 / bottle.
