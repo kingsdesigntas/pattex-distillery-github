@@ -17,7 +17,7 @@ exports.createPages = async ({ actions }) => {
     component: ogImageTemplate,
     size,
     context: {
-      description: "a image created with gatsby-plugin-open-graph-images",
+      size,
     },
   })
 
